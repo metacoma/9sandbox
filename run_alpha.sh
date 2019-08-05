@@ -9,5 +9,7 @@ fi
 
 docker run --rm -it                                     \
   -p 0.0.0.0:1800:1800                                  \
+	--name alpha																					\
+	--network 9sandbox																		\
   -v `pwd`/alpha:/usr/inferno/host                      \
   ${INFERNO_IMAGE} $INFERNO_EMU_OPTS
