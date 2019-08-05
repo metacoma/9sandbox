@@ -2,7 +2,7 @@
 
 . ./env
 
-INFERNO_EMU_OPTS="-d /dis/emuinit.dis"
+INFERNO_EMU_OPTS="-d /dis/emuinit.dis /host/export_alpha"
 if [ -n "$*" ]; then
 	INFERNO_EMU_OPTS="$*"
 fi
