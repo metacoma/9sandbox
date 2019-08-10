@@ -2,32 +2,12 @@ version: '3.2'
 
 services:
 
-  websockify: 
-    build:
-      dockerfile: Dockerfile
-      context: files/websockify-c
-    image: metacoma/websockify:c
-    ports:
-      - "0.0.0.0:2801:80"
-    links:
-      - "alpha"
-    networks:
-      - "9sandbox"
-    command: "0.0.0.0:1802 alpha:1800"
-
   http: 
-    build:
-      dockerfile: Dockerfile
-      context: files/openresty-websockify
-    image: metacoma/openresty-websockify:latest
+    image: metacoma/ws2tcp:latest
     volumes:
       - type: bind
-        source: ./files/http/vhost.conf
-        target: /etc/nginx/conf.d/default.conf
-
-      - type: bind
-        source: ./files/http/nginx.conf
-        target: /etc/nginx/nginx.conf
+        source: ./files/http/www-dir
+        target: /usr/share/nginx/html
     ports:
       - "0.0.0.0:2800:80"
     links:
@@ -35,45 +15,6 @@ services:
     networks:
       - "9sandbox"
 
-  nodejs-sandbox:
-    build:
-      dockerfile: Dockerfile
-      context: files/nodejs-9p-sandbox
-    volumes:
-      - type: bind
-        source: ./files/nodejs-9p-sandbox
-        target: /host
-    tty: true
-    networks:
-      - "9sandbox"
-  
-
-  ws2tcp:
-    image: efrecon/websockify
-    volumes:
-      - type: bind
-        source: ./files/http/vhost.conf
-        target: /etc/nginx/conf.d/default.conf
-    ports:
-      - "0.0.0.0:2802:80"
-    command: 80 alpha:1800
-    links:
-      - "alpha"
-    networks:
-      - "9sandbox"
-
-  nodejs-sandbox:
-    build:
-      dockerfile: Dockerfile
-      context: files/nodejs-9p-sandbox
-    volumes:
-      - type: bind
-        source: ./files/nodejs-9p-sandbox
-        target: /host
-    tty: true
-    networks:
-      - "9sandbox"
-  
   alpha:
     image: yarikk/inferno-os
     ports:
