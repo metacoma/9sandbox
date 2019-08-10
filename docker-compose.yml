@@ -1,0 +1,34 @@
+version: '3.2'
+
+services:
+
+  http: 
+    image: metacoma/ws2tcp:latest
+    volumes:
+      - type: bind
+        source: ./files/http/www-dir
+        target: /usr/share/nginx/html
+    ports:
+      - "0.0.0.0:2800:80"
+    links:
+      - "alpha"
+    networks:
+      - "9sandbox"
+
+  alpha:
+    image: yarikk/inferno-os
+    ports:
+      - "0.0.0.0:1800:1800"
+    expose:
+      - "1800"
+    volumes:
+      - type: bind
+        source: ./alpha
+        target: /usr/inferno/host
+    networks: 
+      - "9sandbox"
+    command: "-d /dis/emuinit.dis /host/export_alpha"
+
+    
+networks:
+  9sandbox:
