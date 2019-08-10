@@ -1,0 +1,25 @@
+<html>
+
+<head>
+	<title> 9sandbox </title>
+	<script type="text/javascript" charset="utf-8" src="/js/lib/9p/9p.js"></script>
+
+	<script>
+		function Tversion(version) {
+			var buf = [
+			  0x13, 0x00, 0x00, 0x00, 0x64, 0xff, 0xff, 0x18,
+				  0x20, 0x00, 0x00, 0x06, 0x00, 0x39, 0x50, 0x32,
+					  0x30, 0x30, 0x31
+			 ];	
+			 return buf
+		} 
+		function sandboxInit() {
+			var _9pClient = new NineP("ws://localhost:2800/ws2tcp?backend=alpha:1800");
+			_9pClient.Tversion(65535)
+		} 
+	</script>
+</head>
+<body onload='sandboxInit()'>
+</body>
+
+</html>

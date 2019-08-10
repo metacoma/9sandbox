@@ -1,3 +1,5 @@
+![9p-over-ws](https://user-images.githubusercontent.com/5146707/62827130-626bb000-bbda-11e9-96bc-89b0052119be.png)
+
 ```
 docker network create 9sandbox
 $ ./run_alpha.sh
