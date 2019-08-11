@@ -1,25 +1,51 @@
 <html>
 
 <head>
+<style type="text/css">
+html,
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* Scale canvas with resize attribute to full size */
+canvas[resize] {
+    width: 100%;
+    height: 100%;
+}
+</style>
 	<title> 9sandbox </title>
+	<script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/js/lib/9p/9p.js"></script>
+	<script type="text/paperscript" charset="utf-8" src="/js/lib/canvas.js" canvas="sandboxCanvas"></script>
+	<script type="text/paperscript" charset="utf-8" src="/js/lib/draw/box.js" canvas="sandboxCanvas"></script>
 
 	<script>
-		function Tversion(version) {
-			var buf = [
-			  0x13, 0x00, 0x00, 0x00, 0x64, 0xff, 0xff, 0x18,
-				  0x20, 0x00, 0x00, 0x06, 0x00, 0x39, 0x50, 0x32,
-					  0x30, 0x30, 0x31
-			 ];	
-			 return buf
-		} 
 		function sandboxInit() {
-			var _9pClient = new NineP("ws://localhost:2800/ws2tcp?backend=alpha:1800");
-			_9pClient.Tversion(65535)
+			//var _9pClient = new NineP("ws://localhost:2800/ws2tcp?backend=alpha:1800");
+			//_9pClient.Tversion(65535)
+
+			box = new DrawBox({
+				x: 200,
+				y: 150,
+				width: 100,
+				height: 80,
+				title: "hello",
+			});
+
+			box = new DrawBox({
+				x: 400,
+				y: 100,
+				width: 200,
+				height: 80,
+				title: "second hello",
+			});
 		} 
 	</script>
 </head>
 <body onload='sandboxInit()'>
+<canvas id="sandboxCanvas" resize></canvas>
 </body>
 
 </html>
