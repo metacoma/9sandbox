@@ -8,9 +8,13 @@ DrawBox = function(arg) {
   this.group.onMouseEnter = function(event) {
     console.log(event)
   } 
-
+	
   return this;
 }; 
+
+DrawBox.prototype.linkObject = function(arg) {
+	thin.9sandboxObject = arg
+} 
 
 DrawBox.prototype.box = function(arg) { 
   rect = Path.Rectangle({
